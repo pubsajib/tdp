@@ -1,5 +1,5 @@
 
-@php
+@php 
     $seo = DB::table('seos')->first();
 @endphp
 
@@ -13,14 +13,14 @@
         <title>@yield('title')</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="meta_author" content="{{ $seo->meta_author }}">
-
+        
         <meta name="meta_keyword" content="@yield('keyword')">
         <meta name="meta_title" content="@yield('metatitle')">
         <meta name="meta_description" content="{{ $seo->meta_description }}">
         <meta name="google_tag_manager" content="{{ $seo->google_tag_manager }}">
         <meta name="google_verification" content="{{ $seo->google_verification }}">
         <meta name="alexa_analytics" content="{{ $seo->alexa_analytics }}">
-
+        
         <meta property="fb:app_id" content="649000086450414" />
         <meta property="og:url"    content="website" />
         <meta property="og:type"   content="article" />
@@ -34,11 +34,11 @@
         <meta name="twitter:card" content="summary"/>
         <meta property="twitter:title"  content="@yield('title')"/>
         <meta property="twitter:image"  content="https://phenomenalbangladesh.com/@yield('image')" />
-
-
-        <!-- Bootstrap CSS -->
+        
+            
+        <!-- Bootstrap CSS --> 
         <link rel="stylesheet" href="{{ asset('frontend//assets/css/bootstrap.min.css') }}">
-        <!-- Animate CSS -->
+        <!-- Animate CSS --> 
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.min.css') }}">
         <!-- Meanmenu CSS -->
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/meanmenu.css') }}">
@@ -60,7 +60,7 @@
         <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=60ede07d003943001ce6e891&product=inline-share-buttons" async="async"></script>
 
         <link rel="icon" type="image/ico" href="{{ asset('upload/dpb-faveicon.png') }}">
-
+        
         <style>
             p{
                 font-size:16px;
@@ -75,10 +75,9 @@
         <!-- End Navbar Area -->
 
         <!-- Start Main News Area -->
-
         @yield('content_area')
         <!-- End Default News Area -->
-
+        
         <!-- Start Footer Area -->
         @include('frontend.includes.footer')
         <!-- End Footer Area -->
@@ -115,6 +114,6 @@
             })
         </script>
 
-
+      
     </body>
 </html>
