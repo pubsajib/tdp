@@ -14,30 +14,30 @@ Edit News Post
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title text-center text-wight-bold">Post Details</h4>
-                    
+
                     <form class="forms-sample" action="{{ route('update.post',$post->id)}}" method="post" enctype="multipart/form-data">
-                    @csrf                  
+                    @csrf
                         <div class="form-group">
                             <label for="exampleInputName1">Title</label>
                             <input type="text" class="form-control" name="title" value="{{ $post->title }}">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputName1">Sub-Title</label>
-                            <input type="text" class="form-control" name="subtitle" value="{{ $post->subtitle }}" id="exampleInputName1">                          
+                            <input type="text" class="form-control" name="subtitle" value="{{ $post->subtitle }}" id="exampleInputName1">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputName1">Follow-UP</label>
                             <input type="text" class="form-control" name="followup" value="{{ $post->followup }}" id="exampleInputName1">
-                        </div>                       
+                        </div>
                         <div class=row>
                             <div class="col-md-6 form-group">
                                 <label for="exampleFormControlSelect2">Select Category</label>
                                 <select class="form-control" name="category_id" id="exampleFormControlSelect2">
-                                    <option disabled="" selected="">---Select Category---</option>                                   
+                                    <option disabled="" selected="">---Select Category---</option>
                                 @foreach($category as $row)
-                                <option value="{{ $row->id }}" <?php if ($row->id == $post->category_id){ echo "selected";} ?> 
-                                >{{$row->category}} </option>                               
+                                <option value="{{ $row->id }}" <?php if ($row->id == $post->category_id){ echo "selected";} ?>
+                                >{{$row->category}} </option>
                                 @endforeach
                                 </select>
                             </div>
@@ -48,24 +48,24 @@ Edit News Post
                                     <option disabled="" selected="">---Select Sub-Category---</option>
 
                                     @foreach($sub as $row)
-                                <option value="{{ $row->id }}" <?php if ($row->id == $post->subcategory_id){ echo "selected";} ?> 
+                                <option value="{{ $row->id }}" <?php if ($row->id == $post->subcategory_id){ echo "selected";} ?>
                                 >{{$row->subcategory}} </option>
-                                
+
                                 @endforeach
-                                </select> 
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputName1">Tags</label>
                             <input type="text" class="form-control" name="tag" value="{{ $post->tag }}" id="exampleInputName1">
                         </div>
-                        <div class="row">  
-                            <div class="col-md-4">  
+                        <div class="row">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>News Picture Upload</label>
                                     <div class="input-group col-xs-6">
                                     <span class="input-group-append">
-                                    <input type="file" name="image" class="file-upload-default">    
+                                    <input type="file" name="image" class="file-upload-default">
                                     </span>
                                     @error('image')
                                     <span class="text-danger">{{ $message }}</span>
@@ -76,7 +76,7 @@ Edit News Post
                                     <div class="input-group col-xs-6">
                                     <span class="input-group-append">
                                     <img src="{{ asset($post->image) }}" style="width: 150px; height: 100px; margin-right: 50px">
-                                    <input type="hidden" name="ex_image" value="{{ $post->image  }}" class="file-upload-default">  
+                                    <input type="hidden" name="ex_image" value="{{ $post->image  }}" class="file-upload-default">
                                     </span>
                                     </div>
                                 </div>
@@ -98,7 +98,8 @@ Edit News Post
                                 'বিনোদন ডেস্ক',
                                 'আন্তর্জাতিক ডেস্ক',
                                 'অনলাইন ডেস্ক',
-                            ];             
+                                'নাম প্রকাশে অনিচ্ছুক',
+                            ];
                             @endphp
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -106,20 +107,21 @@ Edit News Post
                                 <select class="form-control" name="author" value="$post->author">
                                     <option disabled="" selected="">---Select Author---</option>
                                     <option value="নিজস্ব প্রতিবেদক" @if ($post->author == 'নিজস্ব প্রতিবেদক') Selected @endif>নিজস্ব প্রতিবেদক</option>
-                                    <option value="ফেনোমেনাল বাংলাদেশ ডেস্ক" 
+                                    <option value="ফেনোমেনাল বাংলাদেশ ডেস্ক"
                                     @if ($post->author == 'ফেনোমেনাল বাংলাদেশ ডেস্ক') Selected @endif>ফেনোমেনাল বাংলাদেশ ডেস্ক</option>
                                     <option value="ফেনোমেনাল বাংলাদেশ প্রতিনিধি" @if ($post->author == 'ফেনোমেনাল বাংলাদেশ প্রতিনিধি') Selected @endif>ফেনোমেনাল বাংলাদেশ প্রতিনিধি</option>
                                     <option value="স্পোর্টস ডেস্ক" @if ($post->author == 'স্পোর্টস ডেস্ক') Selected @endif>স্পোর্টস ডেস্ক</option>
-                                    <option value="বিনোদন ডেস্ক" @if ($post->author == 'বিনোদন ডেস্ক') Selected @endif>বিনোদন ডেস্ক</option>                          
-                                    <option value="আন্তর্জাতিক ডেস্ক" @if ($post->author == 'আন্তর্জাতিক ডেস্ক') Selected @endif>আন্তর্জাতিক ডেস্ক</option>                   
-                                    <option value="অনলাইন ডেস্ক" @if ($post->author == 'অনলাইন ডেস্ক') Selected @endif>অনলাইন ডেস্ক</option>                          
-                                </select> 
+                                    <option value="বিনোদন ডেস্ক" @if ($post->author == 'বিনোদন ডেস্ক') Selected @endif>বিনোদন ডেস্ক</option>
+                                    <option value="আন্তর্জাতিক ডেস্ক" @if ($post->author == 'আন্তর্জাতিক ডেস্ক') Selected @endif>আন্তর্জাতিক ডেস্ক</option>
+                                    <option value="অনলাইন ডেস্ক" @if ($post->author == 'অনলাইন ডেস্ক') Selected @endif>অনলাইন ডেস্ক</option>
+                                    <option value="নাম প্রকাশে অনিচ্ছুক" @if ($post->author == 'নাম প্রকাশে অনিচ্ছুক') Selected @endif>নাম প্রকাশে অনিচ্ছুক</option>
+                                </select>
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputName1">যদি জেলা প্রতিনিধি হয় (উদাহরনঃ গাজিপুর প্রতিনিধি)</label>
-                            <input type="text" class="form-control" name="author2" value="{{ in_array($post->author, $authorData) ? '' : $post->author }}" id="exampleInputName1">                          
+                            <input type="text" class="form-control" name="author2" value="{{ in_array($post->author, $authorData) ? '' : $post->author }}" id="exampleInputName1">
                         </div>
                         <div class="form-group">
                             <label for="exampleTextarea1">Lead News Section</label>
@@ -127,12 +129,12 @@ Edit News Post
                             @error('leadnews')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
-                        </div> 
+                        </div>
 
                         <div class="form-group">
                             <label for="exampleTextarea1">Details News Section</label>
                             <textarea class="form-control" name="details" id="summernote"> {{ $post->details }} </textarea>
-                        </div> 
+                        </div>
             <hr>
             <h4 class="text-center">Extra Option</h4>
 
@@ -163,14 +165,14 @@ Edit News Post
                 <?php if($post->first_section_thumbnail == 1){ echo "checked";} ?>
                 > First section thumbnail <i class="input-helper"></i></label>
             </div>
-            
+
             <br><br>
                 <hr>
-                    <h3 class="text-center">SEO Option</h3>                       
+                    <h3 class="text-center">SEO Option</h3>
                         <div class="form-group">
                             <label for="exampleInputName1">Meta Title <span style="color:red;font-weight:bold;"></span></label>
                             <input type="text" class="form-control" name="metatitle" value="{{ $post->metatitle }}" id="exampleInputName1">
-                            
+
                             @error('metatitle')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -178,7 +180,7 @@ Edit News Post
 
                         <div class="form-group">
                             <label for="exampleInputName1">Keywords <span style="color:red;font-weight:bold;"></span></label>
-                            <textarea type="text" class="form-control" name="keyword" id="exampleInputName1"> {{ $post->keyword }} </textarea>                           
+                            <textarea type="text" class="form-control" name="keyword" id="exampleInputName1"> {{ $post->keyword }} </textarea>
                             @error('keyword')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -186,7 +188,7 @@ Edit News Post
 
                         <div class="form-group">
                             <label for="exampleInputName1">Meta Description <span style="color:red;font-weight:bold;"></span></label>
-                            <textarea type="text" class="form-control" name="description" id="exampleInputName1">{{ $post->description }}</textarea>                           
+                            <textarea type="text" class="form-control" name="description" id="exampleInputName1">{{ $post->description }}</textarea>
                             @error('description')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -195,15 +197,15 @@ Edit News Post
                         <div class="form-group">
                             <label for="exampleInputName1">Tags <span style="color:red;font-weight:bold;"></span></label>
                             <textarea type="text" class="form-control" name="tag" id="exampleInputName1">{{ $post->tag }}</textarea>
-                            
+
                             @error('tag')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                  </div>
-                    <br><br><br>               
+                    <br><br><br>
                       <button type="submit" class="btn btn-primary mr-2">Update Now</button>
-                     
+
                     </form>
                   </div>
                 </div>
@@ -224,9 +226,9 @@ Edit News Post
                        $("#subcategory_id").empty();
                               $.each(data,function(key,value){
                                   $("#subcategory_id").append('<option value="'+value.id+'">'+value.subcategory+'</option>');
-                             });                           
+                             });
                      },
-                    
+
                  });
              } else {
                  alert('danger');
