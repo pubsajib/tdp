@@ -70,6 +70,7 @@ class PostController extends Controller
           $data['keyword'] = $request->keyword;
           $data['description'] = $request->description;
           $data['tag'] = $request->tag;
+          $data['image_caption'] = $request->image_caption;
           $data['post_date'] = date('d F, Y');
           $data['post_time'] = date('H:i');
           $data['created_at'] = Carbon::now();
@@ -123,6 +124,7 @@ class PostController extends Controller
             $data['category_id'] = $request->category_id;
             $data['subcategory_id'] = $request->subcategory_id;
             $data['image'] = $request->image;
+            $data['image_caption'] = $request->image_caption;
             $data['imagecredit'] = $request->imagecredit;
             $data['leadnews'] = $request->leadnews;
             $data['details'] = $request->details;

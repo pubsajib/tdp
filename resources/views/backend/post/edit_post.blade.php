@@ -81,6 +81,12 @@ Edit News Post
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Picture Caption</label>
+                                    <input type="text" class="form-control" name="image_caption" id="image_caption" value="{{ $post->image_caption }}">
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">

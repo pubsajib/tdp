@@ -74,6 +74,16 @@ Add Post
                                 <img id="preview-image-before-upload" src="#"
                                     alt="preview image" style="max-height: 200px;">
                             </div>
+                            <div class="col-md-6">
+                                <img id="preview-image-before-upload" src="#"
+                                    alt="preview image" style="max-height: 200px;">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Picture Caption</label>
+                                    <input type="text" class="form-control" name="image_caption" id="image_caption">
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
