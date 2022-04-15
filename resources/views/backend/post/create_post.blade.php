@@ -113,7 +113,7 @@ Add Post
                             <textarea id="count" class="form-control" name="leadnews" id="summernote1"></textarea>
                             <div class="d-flex">
                                 <p class="error-msg" style="color: red; float: left; display: none">Character Limit Exceed</p>
-                                <p class="float-right" style="float: right;"><span id="countno">0</span>/200</p>
+                                <p class="float-right" style="float: right;"><span id="countno">0</span>/500</p>
                                 <br clear="both">
                             </div>
 

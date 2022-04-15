@@ -17,13 +17,13 @@ class PostController extends Controller
         $this->middleware('auth');
     }
 
-    public function Index(){        
+    public function Index(){
        // $posts = Post::all();
         $post = DB::table('posts')
         ->join('categories','posts.category_id','categories.id')
         ->join('subcategories','posts.subcategory_id','subcategories.id')
         ->select('posts.*','categories.category','subcategories.subcategory')
-        ->orderBy('id','desc')->paginate(10);   
+        ->orderBy('id','desc')->paginate(10);
 
         return view('backend.post.viewpost',compact('post'));
     }
@@ -32,14 +32,14 @@ class PostController extends Controller
         $category = DB::table('categories')->get();
         return view('backend.post.create_post',compact('category'));
     }
-    
-    public function StorePost(Request $request){   
-       
+
+    public function StorePost(Request $request){
+
         $validatedData = $request->validate([
             'title' => 'required|max:80',
-            'leadnews' => 'required|max:200',
+            'leadnews' => 'required|max:500',
             'category_id' => 'required',
-            
+
             'image' => 'required',
             'details' => 'required',
             'metatitle' => 'required',
@@ -47,7 +47,7 @@ class PostController extends Controller
             'description' => 'required',
             'tag' => 'required'
             ]);
-            
+
           $data = array();
           $data['title'] = $request->title;
           $data['author'] = $request->author ?? $request->author2 ;
@@ -56,7 +56,7 @@ class PostController extends Controller
           $data['followup'] = $request->followup;
           $data['rper_name'] = $request->rper_name;
           $data['category_id'] = $request->category_id;
-          $data['subcategory_id'] = $request->subcategory_id;      
+          $data['subcategory_id'] = $request->subcategory_id;
           $data['image'] = $request->image;
           $data['imagecredit'] = $request->imagecredit;
           $data['leadnews'] = $request->leadnews;
@@ -71,9 +71,9 @@ class PostController extends Controller
           $data['description'] = $request->description;
           $data['tag'] = $request->tag;
           $data['post_date'] = date('d F, Y');
-          $data['post_time'] = date('H:i'); 
+          $data['post_time'] = date('H:i');
           $data['created_at'] = Carbon::now();
-        
+
                 $image = $request->image;
                  if($image) {
                 $image_one = uniqid().'.'.$image->getClientOriginalExtension();
@@ -82,19 +82,19 @@ class PostController extends Controller
                 //image/postimg/254863.jpg
                 DB::table('posts')->insert($data);
                // Post::insert();
- 
+
                 $notification = array(
                     'message' => 'Post Insert Successfully',
                     'alert_type'=> 'success'
-                ); 
+                );
                 return Redirect()->route('allnews.post')->with($notification);
 
             }else{
-                return Redirect()->back();              
+                return Redirect()->back();
             }
 
         }//END Method
-                          
+
     public function EditPost($id){
         $post = DB::table('posts')->where('id',$id)->first();
         $category = DB::table('categories')->get();
@@ -107,12 +107,12 @@ class PostController extends Controller
     public function UpdatePost( Request $request, $id){
         $validatedData = $request->validate([
             'title' => 'required|max:80',
-            'leadnews' => 'required|max:200',
+            'leadnews' => 'required|max:500',
             'category_id' => 'required',
             'details' => 'required',
             'tag' => 'required'
             ]);
-             
+
             $data = array();
             $data['title'] = $request->title;
             $data['author'] = $request->author ?? $request->author2;
@@ -136,7 +136,7 @@ class PostController extends Controller
             $data['description'] = $request->description;
             $data['tag'] = $request->tag;
             $data['updated_at'] = Carbon::now();
-           
+
                 $ex_image = $request->ex_image;
                 $image = $request->image;
                    if($image) {
@@ -150,20 +150,20 @@ class PostController extends Controller
                   $notification = array(
                       'message' => 'News Update Successfully',
                       'alert_type'=> 'success'
-                  ); 
+                  );
                   return Redirect()->route('allnews.post')->with($notification);
-  
+
               }else{
                     $data['image'] = $ex_image;
                     DB::table('posts')->where('id',$id)->update($data);
-                               
+
                   $notification = array(
                       'message' => 'News Update Successfully',
                       'alert_type'=> 'success'
-                  ); 
-                return Redirect()->route('allnews.post')->with($notification);              
+                  );
+                return Redirect()->route('allnews.post')->with($notification);
               }
-    } // Update Post Class End      
+    } // Update Post Class End
 
     public function DeletePost($id){
         $image = Post::find($id);
