@@ -50,7 +50,20 @@
                                 <span class="sub-headline"><h6>{{ $post->subtitle }}</h6></span>
                             </div>
                             <div class="row">
-                                <div class="jurnalist-name"><a href="#"> @if($post->author == NULL)<span>{{$post->name}}</span>@else<span>{{$post->author}}</span>@endif  , </a><span>{{ $post->position }}</span></div>
+                                <div class="jurnalist-name">
+                                    <a href="#">
+                                        @if($post->author == NULL)
+                                            <span>{{$post->name}}</span>
+                                        @else
+                                            <span>{{$post->author}}</span>
+                                        @endif
+                                    </a>
+                                    <span>
+                                        @if($post->position != '')
+                                        , {{ $post->position }}
+                                        @endif
+                                    </span>
+                                </div>
 
                             </div>
                             <div class="row news-publish-date">
