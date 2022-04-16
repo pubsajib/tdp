@@ -25,7 +25,7 @@ class CreatePostsTable extends Migration
             $table->string('image');
             $table->string('imagecredit')->nullable();
             $table->text('leadnews')->nullable();
-            $table->text('details')->nullable();
+            $table->longText('details')->nullable();
             $table->string('metatitle')->nullable();
             $table->string('keyword')->nullable();
             $table->text('description')->nullable();

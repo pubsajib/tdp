@@ -22,6 +22,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('backend/css/sb-admin-2.min.css')}}" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 
 
@@ -145,6 +146,8 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
+    <script src="{{asset('backend/js/summernote-image-attributes.js')}}"></script>
+
 
 
     <script type="text/javascript">
@@ -152,6 +155,22 @@
                 placeholder: 'Write here',
                 tabsize: 2,
                 height: 400,
+                imageAttributes: {
+                    icon: '<i class="note-icon-pencil"/>',
+                    figureClass: 'figureClass',
+                    figcaptionClass: 'captionClass',
+                    captionText: 'Caption Goes Here.',
+                    manageAspectRatio: false // true = Lock the Image Width/Height, Default to true
+                },
+                lang: 'en-US',
+                popover: {
+                    image: [
+                        ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+                        ['float', ['floatLeft', 'floatRight', 'floatNone']],
+                        ['remove', ['removeMedia']],
+                        ['custom', ['imageAttributes']],
+                    ],
+                },
 
             });
     </script>

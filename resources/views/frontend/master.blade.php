@@ -56,6 +56,8 @@
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
         <!-- Responsive CSS -->
 		<link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
+        <!-- Custom css -->
+		<link rel="stylesheet" href="{{ asset('frontend/assets/css/custom.css') }}">
 
         <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=60ede07d003943001ce6e891&product=inline-share-buttons" async="async"></script>
 
