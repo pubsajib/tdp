@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3"></div>
-                    <div class="col-lg-3">
+                            <div class="col-lg-3">
                         <ul class="top-header-social">
                             <li>
                                 <a href="{{ $sociallink->facebook}}" class="facebook" target="_blank">
@@ -28,22 +28,22 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ $sociallink->twitter}}" class="pinterest" target="_blank">
+                                <a href="{{ $sociallink->instagram}}" class="instagram" target="_blank">
                                     <i class='bx bxl-instagram'></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ $sociallink->linkedin}}" class="pinterest" target="_blank">
+                                <a href="{{ $sociallink->linkedin}}" class="linkedin" target="_blank">
                                     <i class='bx bxl-linkedin'></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ $sociallink->instagram}}" class="twitter" target="_blank">
+                                <a href="{{ $sociallink->twitter}}" class="twitter" target="_blank">
                                     <i class='bx bxl-twitter'></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ $sociallink->youtube}}" class="linkedin" target="_blank">
+                                <a href="{{ $sociallink->youtube}}" class="youtube" target="_blank">
                                     <i class='bx bxl-youtube'></i>
                                 </a>
                             </li>
