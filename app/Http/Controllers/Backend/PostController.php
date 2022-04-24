@@ -88,10 +88,12 @@ class PostController extends Controller
                     'message' => 'Post Insert Successfully',
                     'alert_type'=> 'success'
                 );
-                return Redirect()->route('allnews.post')->with($notification);
+                //return Redirect()->route('allnews.post')->with($notification);
+                return ['status'=>200, 'reason'=>'Post Insert Successfully'];
 
             }else{
-                return Redirect()->back();
+                //return Redirect()->back();
+                return ['status'=>401, 'reason'=>'Something went wrong'];
             }
 
         }//END Method
@@ -153,7 +155,8 @@ class PostController extends Controller
                       'message' => 'News Update Successfully',
                       'alert_type'=> 'success'
                   );
-                  return Redirect()->route('allnews.post')->with($notification);
+                  //return Redirect()->route('allnews.post')->with($notification);
+                  return ['status'=>200, 'reason'=>'News Update Successfully'];
 
               }else{
                     $data['image'] = $ex_image;
@@ -163,7 +166,8 @@ class PostController extends Controller
                       'message' => 'News Update Successfully',
                       'alert_type'=> 'success'
                   );
-                return Redirect()->route('allnews.post')->with($notification);
+                //return Redirect()->route('allnews.post')->with($notification);
+                  return ['status'=>200, 'reason'=>'News Update Successfully'];
               }
     } // Update Post Class End
 

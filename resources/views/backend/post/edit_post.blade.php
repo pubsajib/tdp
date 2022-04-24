@@ -15,20 +15,22 @@ Edit News Post
                   <div class="card-body">
                     <h4 class="card-title text-center text-wight-bold">Post Details</h4>
 
-                    <form class="forms-sample" action="{{ route('update.post',$post->id)}}" method="post" enctype="multipart/form-data">
+                    <form class="forms-sample" id="post_form" action="{{ route('update.post',$post->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
+                        <div class="alert alert-success" id="success_message" style="display:none"></div>
+                        <div class="alert alert-danger" id="error_message" style="display: none"></div>
                         <div class="form-group">
                             <label for="exampleInputName1">Title</label>
-                            <input type="text" class="form-control" name="title" value="{{ $post->title }}">
+                            <input type="text" class="form-control" name="title" id="title" value="{{ $post->title }}">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputName1">Sub-Title</label>
-                            <input type="text" class="form-control" name="subtitle" value="{{ $post->subtitle }}" id="exampleInputName1">
+                            <input type="text" class="form-control" name="subtitle" value="{{ $post->subtitle }}" id="sub_title">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputName1">Follow-UP</label>
-                            <input type="text" class="form-control" name="followup" value="{{ $post->followup }}" id="exampleInputName1">
+                            <input type="text" class="form-control" name="followup" value="{{ $post->followup }}" id="followup">
                         </div>
                         <div class=row>
                             <div class="col-md-6 form-group">
@@ -92,7 +94,7 @@ Edit News Post
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputName1">Picture Credit <span style="color:red;font-weight:bold;">*</span></label>
-                                    <input type="text" class="form-control" name="imagecredit" value="{{$post->imagecredit}}" id="exampleInputName1">
+                                    <input type="text" class="form-control" name="imagecredit" value="{{$post->imagecredit}}" id="imagecredit">
                                 </div>
                             </div>
                             @php
@@ -110,7 +112,7 @@ Edit News Post
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect2">Author</label>
-                                <select class="form-control" name="author" value="$post->author">
+                                <select class="form-control" name="author" id="author" value="$post->author">
                                     <option disabled="" selected="">---Select Author---</option>
                                     <option value="নিজস্ব প্রতিবেদক" @if ($post->author == 'নিজস্ব প্রতিবেদক') Selected @endif>নিজস্ব প্রতিবেদক</option>
                                     <option value="ফেনোমেনাল বাংলাদেশ ডেস্ক"
@@ -127,11 +129,11 @@ Edit News Post
                         </div>
                         <div class="form-group">
                             <label for="exampleInputName1">যদি জেলা প্রতিনিধি হয় (উদাহরনঃ গাজিপুর প্রতিনিধি)</label>
-                            <input type="text" class="form-control" name="author2" value="{{ in_array($post->author, $authorData) ? '' : $post->author }}" id="exampleInputName1">
+                            <input type="text" class="form-control" name="author2" value="{{ in_array($post->author, $authorData) ? '' : $post->author }}" id="author2">
                         </div>
                         <div class="form-group">
                             <label for="exampleTextarea1">Lead News Section</label>
-                            <textarea class="form-control" name="leadnews" id="summernote1">{{ $post->leadnews }}</textarea>
+                            <textarea class="form-control" name="leadnews" id="count">{{ $post->leadnews }}</textarea>
                             @error('leadnews')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -177,7 +179,7 @@ Edit News Post
                     <h3 class="text-center">SEO Option</h3>
                         <div class="form-group">
                             <label for="exampleInputName1">Meta Title <span style="color:red;font-weight:bold;"></span></label>
-                            <input type="text" class="form-control" name="metatitle" value="{{ $post->metatitle }}" id="exampleInputName1">
+                            <input type="text" class="form-control" name="metatitle" value="{{ $post->metatitle }}" id="metatitle">
 
                             @error('metatitle')
                             <span class="text-danger">{{ $message }}</span>
@@ -186,7 +188,7 @@ Edit News Post
 
                         <div class="form-group">
                             <label for="exampleInputName1">Keywords <span style="color:red;font-weight:bold;"></span></label>
-                            <textarea type="text" class="form-control" name="keyword" id="exampleInputName1"> {{ $post->keyword }} </textarea>
+                            <textarea type="text" class="form-control" name="keyword" id="keyword"> {{ $post->keyword }} </textarea>
                             @error('keyword')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -194,7 +196,7 @@ Edit News Post
 
                         <div class="form-group">
                             <label for="exampleInputName1">Meta Description <span style="color:red;font-weight:bold;"></span></label>
-                            <textarea type="text" class="form-control" name="description" id="exampleInputName1">{{ $post->description }}</textarea>
+                            <textarea type="text" class="form-control" name="description" id="description">{{ $post->description }}</textarea>
                             @error('description')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -202,7 +204,7 @@ Edit News Post
 
                         <div class="form-group">
                             <label for="exampleInputName1">Tags <span style="color:red;font-weight:bold;"></span></label>
-                            <textarea type="text" class="form-control" name="tag" id="exampleInputName1">{{ $post->tag }}</textarea>
+                            <textarea type="text" class="form-control" name="tag" id="tag">{{ $post->tag }}</textarea>
 
                             @error('tag')
                             <span class="text-danger">{{ $message }}</span>
@@ -241,5 +243,144 @@ Edit News Post
              }
          });
      });
+
+   $(document).on("submit", "#post_form", function(event) {
+       event.preventDefault();
+
+       var title = $("#title").val();
+       var category = $("#exampleFormControlSelect2").val();
+       var subcategory = $("#subcategory_id").val();
+       var image = $("#image").val();
+       var imagecredit = $("#imagecredit").val();
+       var leadnews = $("#count").val();
+       var details = $("#summernote").val();
+       var metatitle = $("#metatitle").val();
+       var keyword = $("#keyword").val();
+       var description = $("#description").val();
+       var tag = $("#tag").val();
+
+
+       var validate = "";
+
+       if (title.trim() == "") {
+           validate = validate + "Title is required</br>";
+           $('#title').addClass('border-danger');
+       }
+       else{
+           $('#title').removeClass('border-danger');
+       }
+
+       if (category == "" || category == null) {
+           validate = validate + "Category is required</br>";
+           $('#exampleFormControlSelect2').addClass('border-danger');
+       }
+       else{
+           $('#exampleFormControlSelect2').removeClass('border-danger');
+       }
+
+       if (subcategory == "" || subcategory == null) {
+           validate = validate + "Sub category is required</br>";
+           $('#subcategory_id').addClass('border-danger');
+       }
+       else{
+           $('#subcategory_id').removeClass('border-danger');
+       }
+
+       if (imagecredit.trim() == "") {
+           validate = validate + "Image credit is required</br>";
+           $('#imagecredit').addClass('border-danger');
+       }
+       else{
+           $('#imagecredit').removeClass('border-danger');
+       }
+
+       if (leadnews.trim() == "") {
+           validate = validate + "Lead news is required</br>";
+           $('#count').addClass('border-danger');
+       }
+       else{
+           $('#count').removeClass('border-danger');
+       }
+
+       if (details.trim() == "") {
+           validate = validate + "News details is required</br>";
+           $('#summernote').addClass('border-danger');
+       }
+       else{
+           $('#summernote').removeClass('border-danger');
+       }
+
+       if (metatitle.trim() == "") {
+           validate = validate + "Meta title is required</br>";
+           $('#metatitle').addClass('border-danger');
+       }
+       else{
+           $('#metatitle').removeClass('border-danger');
+       }
+
+       if (keyword.trim() == "") {
+           validate = validate + "Meta keyword is required</br>";
+           $('#keyword').addClass('border-danger');
+       }
+       else{
+           $('#keyword').removeClass('border-danger');
+       }
+
+       if (description.trim() == "") {
+           validate = validate + "Meta description is required</br>";
+           $('#description').addClass('border-danger');
+       }
+       else{
+           $('#description').removeClass('border-danger');
+       }
+
+       if (tag.trim() == "") {
+           validate = validate + "Meta tag is required</br>";
+           $('#tag').addClass('border-danger');
+       }
+       else{
+           $('#tag').removeClass('border-danger');
+       }
+
+       if (validate == "") {
+           var formData = new FormData($("#post_form")[0]);
+           var url = "{{ route('update.post',$post->id) }}";
+
+           $.ajax({
+               type: "POST",
+               url: url,
+               data: formData,
+               success: function(data) {
+                   $("html, body").animate({ scrollTop: 0 }, "slow");
+                   if (data.status == 200) {
+                       $("#success_message").show();
+                       $("#error_message").hide();
+                       $("#success_message").html(data.reason);
+                   } else {
+                       $("#success_message").hide();
+                       $("#error_message").show();
+                       $("#error_message").html(data.reason);
+                   }
+                   setTimeout(function(){
+                       window.location.href="{{route('allnews.post')}}";
+                   },2000)
+               },
+               error: function(data) {
+                   $("html, body").animate({ scrollTop: 0 }, "slow");
+                   $("#success_message").hide();
+                   $("#error_message").show();
+                   $("#error_message").html(data);
+               },
+               cache: false,
+               contentType: false,
+               processData: false
+           });
+       } else {
+           $("html, body").animate({ scrollTop: 0 }, "slow");
+           $("#success_message").hide();
+           $("#error_message").show();
+           $("#error_message").html(validate);
+       }
+   });
 </script>
 @endsection
