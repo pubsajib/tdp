@@ -584,7 +584,7 @@ $ads = DB::table('ads')->where('type',2)->first();
                                 $entertainment_category_post = DB::table('posts')->where('category_id',$entertainment_category->id)
                                 ->where('ent_bigthumbnile',NULL)->orderBy('id','desc')->limit(4)->get();
                                 $education_category_post = DB::table('posts')->where('category_id',$education_category->id)
-                                ->orderBy('id','desc')->limit(4)->get();
+                                ->orderBy('id','desc')->limit(7)->get();
                             @endphp
                     <div class="section-title">
                         <h2><a href="{{ URL::to('category/'.$entertainment_category ->id.'/'.$entertainment_category ->category) }}">{{$entertainment_category ->category}}</a></h2>
@@ -625,23 +625,23 @@ $ads = DB::table('ads')->where('type',2)->first();
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        @foreach($entertainment_category_post as $key=>$news)
-                            @if($key>1)
-                                <div class="single-new-news">
-                                    <div class="new-news-image">
-                                        <a href="#">
-                                            <img src="{{ asset($news->image)}}" alt="image">
+                        <aside class="widget-area">
+                            <section class="widget widget_latest_news_thumb">
+                                @foreach($entertainment_category_post as $key=>$news)
+                                    @if($key>1)
+                                        <article class="item">
+                                        <a href="{{ URL::to('view/post/'.$news->id)}}" class="thumb">
+                                            <span class="" role="img"><img src="{{asset($news->image)}}"></span>
                                         </a>
-                                        <div class="new-news-content">
-                                            <h3>
-                                                <a href="{{ URL::to('view/post/'.$news->id)}}">{{$news->title}}</a>
-                                            </h3>
-                                            <p> {{ \App\Bengali::bn_date_number(\Carbon\Carbon::parse($news->created_at)->diffForHumans()) }}</p>
+                                        <div class="info">
+                                            <h4 class="title usmall"><a href="{{ URL::to('view/post/'.$news->id)}}">{{$news->title}}</a></h4>
+                                            <span>{{ \App\Bengali::bn_date_number(\Carbon\Carbon::parse($news->created_at)->diffForHumans()) }}</span>
                                         </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
+                                    </article>
+                                    @endif
+                                @endforeach
+                            </section>
+                        </aside>
                     </div>
                 </div>
             </div>
