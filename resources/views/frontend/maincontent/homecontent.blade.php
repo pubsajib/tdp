@@ -127,7 +127,7 @@ $ads = DB::table('ads')->where('type',2)->first();
         </section>
         <!-- End National News Area -->
 
-        <!----Start Photo Gallery Section---->
+        <!----Start Politics Section---->
         <section style="margin-top:-30px;">
             <div class="container">
                 @php
@@ -537,6 +537,43 @@ $ads = DB::table('ads')->where('type',2)->first();
                 </div>
             </div>
         </section>
+
+            <!----Start Education Section---->
+            <section style="margin-top:-30px;">
+                <div class="container">
+                    @php
+                        $education_category = DB::table('categories')->where('id',11)->first();
+                        $education_category_post = DB::table('posts')->where('category_id',$education_category->id)
+                                ->orderBy('id','desc')->limit(4)->get();
+                    @endphp
+                    <div>
+                        <div class="health-news">
+                            <div class="section-title">
+                                <h2>{{$education_category->category}}</h2>
+                            </div>
+                            <div class="health-news-slides owl-carousel owl-theme">
+                                @foreach($education_category_post as $news)
+                                    <div class="single-health-news">
+
+                                        <div class="health-news-image">
+                                            <a href="{{ URL::to('view/post/'.$news->id)}}">
+                                                <img src="{{asset($news->image)}}" alt="image">
+                                            </a>
+                                        </div>
+                                        <div class="health-news-content">
+                                            <h3>
+                                                <a href="{{ URL::to('view/post/'.$news->id)}}">{{$news->title}}</a>
+                                            </h3>
+                                            <p><a href="#"></a>{{ \App\Bengali::bn_date_number(\Carbon\Carbon::parse($news->created_at)->diffForHumans()) }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <br>
             <!---- EnterTainment News Section---->
            <section class="new-news-area">
             <div class="container">
@@ -545,7 +582,7 @@ $ads = DB::table('ads')->where('type',2)->first();
                                 $education_category = DB::table('categories')->where('id',11)->first();
                                 $entertainment_big_thub = DB::table('posts')->where('ent_bigthumbnile',1)->orderBy('id','desc')->first();
                                 $entertainment_category_post = DB::table('posts')->where('category_id',$entertainment_category->id)
-                                ->where('ent_bigthumbnile',NULL)->orderBy('id','desc')->limit(2)->get();
+                                ->where('ent_bigthumbnile',NULL)->orderBy('id','desc')->limit(4)->get();
                                 $education_category_post = DB::table('posts')->where('category_id',$education_category->id)
                                 ->orderBy('id','desc')->limit(4)->get();
                             @endphp
@@ -554,8 +591,9 @@ $ads = DB::table('ads')->where('type',2)->first();
                     </div>
                 <div class="row">
                     <div class="col-lg-3">
-                        @foreach($entertainment_category_post as $news)
-                        <div class="single-new-news">
+                        @foreach($entertainment_category_post as $key=>$news)
+                            @if($key<2)
+                                <div class="single-new-news">
                             <div class="new-news-image">
                                 <a href="#">
                                     <img src="{{ asset($news->image)}}" alt="image">
@@ -568,6 +606,7 @@ $ads = DB::table('ads')->where('type',2)->first();
                                 </div>
                             </div>
                         </div>
+                            @endif
                         @endforeach
                     </div>
                     <div class="col-lg-6">
@@ -586,20 +625,23 @@ $ads = DB::table('ads')->where('type',2)->first();
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="daily-briefing-item">
-                        <div class="section-title">
-                            <h2><a href="{{ URL::to('category/'.$education_category ->id.'/'.$education_category ->category) }}">{{$education_category ->category}}</a></h2>
-                        </div>
-                            @foreach( $education_category_post as $news)
-                            <div class="daily-briefing-content">
-
-                                <h4>
-                                    <a href="#">{{$news->title}}</a>
-                                </h4>
-                                <p>{{ \App\Bengali::bn_date_number(\Carbon\Carbon::parse($news->created_at)->diffForHumans()) }}</p>
-                            </div>
-                            @endforeach
-                        </div>
+                        @foreach($entertainment_category_post as $key=>$news)
+                            @if($key>1)
+                                <div class="single-new-news">
+                                    <div class="new-news-image">
+                                        <a href="#">
+                                            <img src="{{ asset($news->image)}}" alt="image">
+                                        </a>
+                                        <div class="new-news-content">
+                                            <h3>
+                                                <a href="{{ URL::to('view/post/'.$news->id)}}">{{$news->title}}</a>
+                                            </h3>
+                                            <p> {{ \App\Bengali::bn_date_number(\Carbon\Carbon::parse($news->created_at)->diffForHumans()) }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
