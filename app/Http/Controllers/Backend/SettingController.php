@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class SettingController extends Controller
 {
@@ -18,7 +18,7 @@ class SettingController extends Controller
     }
 
     public function UpdateSocialMedia(Request $request, $id){
-        
+
         $data=array();
         $data['facebook']= $request->facebook;
         $data['twitter']= $request->twitter;
@@ -49,6 +49,7 @@ class SettingController extends Controller
         $data['meta_keyword']= $request->meta_keyword;
         $data['meta_description']= $request->meta_description;
         $data['google_analytics']= $request->google_analytics;
+        $data['google_tag_manager']= $request->google_tag_manager;
         $data['google_verification']= $request->google_verification;
         $data['alexa_analytics']= $request->alexa_analytics;
 
@@ -62,5 +63,5 @@ class SettingController extends Controller
 
 
     }
-    
+
 }

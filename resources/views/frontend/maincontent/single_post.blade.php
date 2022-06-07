@@ -74,7 +74,7 @@
                             <div class="article-image">
                                 <img src="{{ asset($post->image) }}" alt="image">
                                 <br>
-                                <div><span><p>{{ $post->image_caption }} {{ $post->imagecredit }}</p></span></div>
+                                <div><span><p>{{ ( !empty($post->image_caption) ? $post->image_caption : '') }} {{ $post->imagecredit }}</p></span></div>
                                 </div>
 
                             <div class="article-content">
